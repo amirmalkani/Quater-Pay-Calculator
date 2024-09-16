@@ -12,15 +12,27 @@
 </head>
 
 <body>
-    <nav class="navbar bg-body-tertiary">
-        <div class="container-fluid justify-content-start">
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
             <a class="navbar-brand d-flex align-items-center" href="#">
-                <img src="images/NavIcon.png" alt="Logo" width="30" height="24" class="me-2">
-                Quater Pay Calculator
+                <img src="images/NavIcon.png" alt="Logo" width="30" height="24" class="me-2 ms-4">
+                <span class="ms-2">Quarter Pay Calculator</span>
             </a>
-            <div class="d-flex align-items-center">
-                <a class="nav-link ms-3" href="index.html">Home</a>
-                <a class="nav-link ms-3" href="aboutMe.html">About Me</a>
+            <!-- Hamburger Button for Mobile -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <!-- Collapsible Content -->
+            <div class="collapse navbar-collapse ms-4" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="aboutMe.html">About Me</a>
+                    </li>
+                </ul>
             </div>
         </div>
     </nav>
