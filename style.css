@@ -1,9 +1,14 @@
-#footer{
-    position:sticky;
+#footer {
+    position: fixed;
     bottom: 0;
     width: 100%;
-    margin-bottom: 0;
-}   
+    margin: 0;
+    left: 0;
+    background-color: #f8f9fa; /* Optional: add a background color */
+    text-align: center; /* Optional: center the text */
+    padding: 10px; /* Optional: add some padding */
+    z-index: 1000; /* Optional: ensure it's above other content */
+}
 
 .card {
     animation: fadeIn 1s ease-in-out;
@@ -19,3 +24,4 @@
         transform: translateY(0);
     }
 }
+a
