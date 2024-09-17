@@ -5,24 +5,77 @@
 let btn = document.getElementById("btn");
 let quater = document.getElementById("inputName");
 let percentage = document.getElementById("inputEmail");
-let totalDaysFinal = 0;
 
-let result = document.getElementById("result");
+
+let btn1 = document.getElementById("btn1");
+let quater1 = document.getElementById("inputName1");
+let percentage1 = document.getElementById("inputEmail1");
+let daysConsumed = document.getElementById("daysConsumed");
+
+let totalDaysFinal = 0;
+// let result = document.getElementById("result");
+let result;
+// let result1 = document.getElementById("result1");
+// for tab navigation start
+
+document.addEventListener('DOMContentLoaded', () => {
+  const tabs = document.querySelectorAll('.nav-link');
+  const mainSections = document.querySelectorAll('.content-section');
+
+  tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+          // Remove the 'active' class from all tabs
+          tabs.forEach(t => t.classList.remove('active'));
+          // Add 'active' class to the clicked tab
+          tab.classList.add('active');
+
+          // Hide all content sections
+          mainSections.forEach(section => section.style.display = 'none');
+
+          // Show the selected content section
+          const contentId = tab.getAttribute('data-content');
+          document.getElementById(contentId).style.display = 'block';
+      });
+  });
+});
+
+// for tab navigation End
 
 btn.addEventListener("click", (e) => {
   e.preventDefault();
+  debugger
+  result = document.getElementById("result");
   if (quater.value != "" && percentage.value != "") {
     let firstValue = getFirstValue(quater.value);
     totalDaysFinal = quaterCall(firstValue);
     let totalWFO = targeDays(totalDaysFinal, percentage.value);
-    debugger;
+    // debugger;
     addResultText(totalWFO, totalDaysFinal);
   } else {
     addResultText();
   }
 });
 
-function addResultText(totalWFO) {
+btn1.addEventListener("click", (e) => {
+  e.preventDefault();
+  debugger
+  result = document.getElementById("result1");
+  if (quater1.value != "" && percentage1.value != "" && daysConsumed.value != "" ) {
+    let firstValue = getFirstValue(quater1.value);
+    totalDaysFinal = 0;
+    totalDaysFinal = quaterCall(firstValue);
+    let totalWFO = targeDays(totalDaysFinal, percentage1.value);
+    let checkAvail = checkAvaiWFH(totalWFO, totalDaysFinal);
+    addResultText1(checkAvail,daysConsumed.value);
+  } else {
+    addResultText();
+  }
+});
+
+function checkAvaiWFH(totalWFO , totalDaysFinal){
+  return totalDaysFinal - totalWFO
+}
+function addResultText(totalWFO,totalDaysFinal) {
   if (totalWFO > 0) {
     let parentContainer = document.getElementById("parentContainer");
     // Add content to the new div (e.g., a heading and some text)
@@ -36,6 +89,21 @@ function addResultText(totalWFO) {
     result.innerText = `Please Enter Quater and Target Percentage`;
   }
 }
+
+function addResultText1(available,daysConsumed) {
+  // if (totalWFO > 0) {
+    let parentContainer = document.getElementById("parentContainer");
+    // Add content to the new div (e.g., a heading and some text)
+    
+    result.innerText = `Result : Remaining ${
+      available - daysConsumed
+    } WFH in this Quater`;
+  }
+  // else{
+  //   result.classList.add("text-center")
+  //   result.innerText = `Please Enter Quater and Target Percentage`;
+  // }
+// }
 
 function targeDays(totalDays, targetPercentage) {
   targetPercentage = targetPercentage / 100;
@@ -82,3 +150,6 @@ function getWorkingDaysInMonth(year, month) {
 
   return workingDays;
 }
+
+
+
