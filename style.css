@@ -1,37 +1,64 @@
 *{
     margin: 0;padding: 0;
+    box-sizing: border-box;
 }
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
-#footer {
+
+body{
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+main {
+    flex: 1; /* Makes the main content take up available space */
+}
+.footerMain {
+    background-color: #f8f9fa; /* Light grey background for footer */
+    /* padding: 10px 0; */
+    text-align: center;
+    width: 100%;
+}
+/* #footer {
     position: static;
     bottom: 0;
     width: 100%;
     margin-bottom: 0;
     font-size: 0.9rem;
-}
-#footer1{
-    position: static;
+} */
+/* #footer1{ */
+    /* position: static; */
     /* position: fixed; */
-    bottom: 0;
+    /* bottom: 0;
     width: 100%;
     margin-bottom: 0;
-    font-size: 0.9rem;
-}
+    font-size: 0.9rem; */
+/* } */
+
 
 .h-fit{
     height: fit-content;
 }
 
-/* .footerMain{
-    position: relative;
-} */
+.alert{
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    margin-top: 20px;
+    margin-bottom: 0 !important;
+}
 
 .card {
     animation: fadeIn 1s ease-in-out;
+}
+
+.f-9{
+    font-size: 0.9rem !important;
+}
+.f-6{
+    font-size: 0.8rem !important;
 }
 
 @keyframes fadeIn {
