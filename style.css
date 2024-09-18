@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=SUSE&display=swap');
+
 *{
     margin: 0;padding: 0;
     box-sizing: border-box;
@@ -61,6 +63,89 @@ main {
     font-size: 0.8rem !important;
 }
 
+.font-add{
+    font-family: "SUSE", sans-serif;
+}
+
+/* Contact me  */
+
+.contact-container {
+    background: #fff;
+    /* background: #e6d9ef; */
+    padding-bottom: 2rem;
+    /* padding-top: 0; */
+    border-radius: 10px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    animation: fadeIn1 1.2s ease-in-out;
+}
+
+.contact-title {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: #333;
+}
+.suse-font {
+    font-family: "SUSE", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+  }
+
+.color-info{
+    background-color: #cff4fc;
+}
+
+.contact-description {
+    margin-bottom: 2rem;
+    font-size: 1.2rem;
+    color: #777;
+}
+
+.social-icons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.icon {
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    border-radius: 50%;
+    background: #ddd;
+    color: #fff;
+    font-size: 1.5rem;
+    transition: transform 0.3s, background 0.3s;
+}
+
+.icon:hover {
+    transform: scale(1.2);
+}
+
+.facebook { background: #3b5998; }
+.instagram { background: #e4405f; }
+.linkedin { background: #0077b5; }
+.whatsapp { background: #25D366; }
+.email { background: #ea4335; }
+
+
+
+@keyframes fadeIn1 {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Contact me end */
+
 @keyframes fadeIn {
     from {
         opacity: 0;
@@ -71,3 +156,4 @@ main {
         transform: translateY(0);
     }
 }
+
