@@ -1,11 +1,7 @@
-//100% -> 85%
-// 75% -> 85%
-// 50% -> 85%
-
+// Existing button and form logic for Target Performance Bonus and Consumed WFH
 let btn = document.getElementById("btn");
 let quater = document.getElementById("inputName");
 let percentage = document.getElementById("inputEmail");
-
 
 let btn1 = document.getElementById("btn1");
 let quater1 = document.getElementById("inputName1");
@@ -13,136 +9,130 @@ let percentage1 = document.getElementById("inputEmail1");
 let daysConsumed = document.getElementById("daysConsumed");
 
 let totalDaysFinal = 0;
-// let result = document.getElementById("result");
 let result;
-// let result1 = document.getElementById("result1");
-// for tab navigation start
 
-document.addEventListener('DOMContentLoaded', () => {
-  const tabs = document.querySelectorAll('.nav-link');
-  const mainSections = document.querySelectorAll('.content-section');
+// Tab navigation logic
+document.addEventListener("DOMContentLoaded", () => {
+  const tabs = document.querySelectorAll(".nav-link");
+  const mainSections = document.querySelectorAll(".content-section");
 
-  tabs.forEach(tab => {
-      tab.addEventListener('click', () => {
-          // Remove the 'active' class from all tabs
-          tabs.forEach(t => t.classList.remove('active'));
-          // Add 'active' class to the clicked tab
-          tab.classList.add('active');
+  tabs.forEach((tab) => {
+    tab.addEventListener("click", () => {
+      tabs.forEach((t) => t.classList.remove("active"));
+      tab.classList.add("active");
 
-          // Hide all content sections
-          mainSections.forEach(section => section.style.display = 'none');
-
-          // Show the selected content section
-          const contentId = tab.getAttribute('data-content');
-          document.getElementById(contentId).style.display = 'block';
-      });
+      mainSections.forEach((section) => (section.style.display = "none"));
+      const contentId = tab.getAttribute("data-content");
+      document.getElementById(contentId).style.display = "block";
+    });
   });
-});
 
-// for tab navigation End
-
-btn.addEventListener("click", (e) => {
-  e.preventDefault();
-  debugger
-  result = document.getElementById("result");
-  if (quater.value != "" && percentage.value != "") {
-    let firstValue = getFirstValue(quater.value);
-    totalDaysFinal = quaterCall(firstValue);
-    let totalWFO = targeDays(totalDaysFinal, percentage.value);
-    // debugger;
-    addResultText(totalWFO, totalDaysFinal);
-  } else {
-    addResultText();
+  // Initialize calendar when DOM is loaded
+  if (window.location.href.includes("index.html")) {
+    initCalendar();
   }
+  // main3.style.display = "none"; // this is added because when the dom was loaded it was appearin in the main1 tab
 });
 
-btn1.addEventListener("click", (e) => {
-  e.preventDefault();
-  debugger
-  result = document.getElementById("result1");
-  if (quater1.value != "" && percentage1.value != "" && daysConsumed.value != "" ) {
-    let firstValue = getFirstValue(quater1.value);
-    totalDaysFinal = 0;
-    totalDaysFinal = quaterCall(firstValue);
-    let totalWFO = targeDays(totalDaysFinal, percentage1.value);
-    let checkAvail = checkAvaiWFH(totalWFO, totalDaysFinal);
-    addResultText1(checkAvail,daysConsumed.value);
-  } else {
-    addResultText();
-  }
-});
+// Button event handlers for the form
+if (window.location.href.includes("calculate.html")) {
+  btn.addEventListener("click", (e) => {
+    e.preventDefault();
+    result = document.getElementById("result");
+    if (quater.value != "" && percentage.value != "") {
+      let firstValue = getFirstValue(quater.value);
+      totalDaysFinal = quaterCall(firstValue);
+      let totalWFO = targeDays(totalDaysFinal, percentage.value);
+      addResultText(totalWFO, totalDaysFinal);
+    } else {
+      addResultText();
+    }
+  });
 
-function checkAvaiWFH(totalWFO , totalDaysFinal){
-  return totalDaysFinal - totalWFO
+  btn1.addEventListener("click", (e) => {
+    e.preventDefault();
+    result = document.getElementById("result1");
+    if (
+      quater1.value != "" &&
+      percentage1.value != "" &&
+      daysConsumed.value != ""
+    ) {
+      let firstValue = getFirstValue(quater1.value);
+      totalDaysFinal = quaterCall(firstValue);
+      let totalWFO = targeDays(totalDaysFinal, percentage1.value);
+      let checkAvail = checkAvaiWFH(totalWFO, totalDaysFinal);
+      addResultText1(checkAvail, daysConsumed.value);
+    } else {
+      addResultText();
+    }
+  });
+
+  monthSelect.addEventListener("change", function () {
+    // Get the selected value
+    // attendanceCount.textContent = "";
+    const yearSelect = document.getElementById("yearSelect").value;
+    const selectedQuater = this.value;
+    initAttendanceCount(selectedQuater, yearSelect);
+  });
+  monthSelect1.addEventListener("change", function () {
+    // Get the selected value
+    const yearSelect = document.getElementById("yearSelect").value;
+    const selectedQuater = this.value;
+    // debugger
+    initAttendanceCount(selectedQuater, yearSelect);
+  });
 }
-function addResultText(totalWFO,totalDaysFinal) {
+function checkAvaiWFH(totalWFO, totalDaysFinal) {
+  return totalDaysFinal - totalWFO;
+}
+
+function addResultText(totalWFO, totalDaysFinal) {
   if (totalWFO > 0) {
-    let parentContainer = document.getElementById("parentContainer");
-    // Add content to the new div (e.g., a heading and some text)
-    
-    result.innerText = `Result : You can do ${
+    result.innerText = `Result: You can do ${
       totalDaysFinal - totalWFO
-    } WFH in this Quater`;
-  }
-  else{
-    result.classList.add("text-center")
-    result.innerText = `Please Enter Quater and Target Percentage`;
+    } WFH in this Quarter`;
+  } else {
+    result.classList.add("text-center");
+    result.innerText = `Please Enter Quarter and Target Percentage`;
   }
 }
 
-function addResultText1(available,daysConsumed) {
-  // if (totalWFO > 0) {
-    let parentContainer = document.getElementById("parentContainer");
-    // Add content to the new div (e.g., a heading and some text)
-    
-    result.innerText = `Result : Remaining ${
-      available - daysConsumed
-    } WFH in this Quater`;
-  }
-  // else{
-  //   result.classList.add("text-center")
-  //   result.innerText = `Please Enter Quater and Target Percentage`;
-  // }
-// }
+function addResultText1(available, daysConsumed) {
+  result.innerText = `Result: Remaining ${
+    available - daysConsumed
+  } WFH in this Quarter`;
+}
 
 function targeDays(totalDays, targetPercentage) {
   targetPercentage = targetPercentage / 100;
-  let requiredDays = Math.ceil(totalDays * targetPercentage);
-  return requiredDays;
+  return Math.ceil(totalDays * targetPercentage);
 }
 
 function quaterCall(firstValue) {
   let totalDays = 0;
-  for (let index = 0; index < 3; index++) {
-    totalDays = totalDays + getWorkingDaysInMonth(2024, firstValue);
+  for (let i = 0; i < 3; i++) {
+    totalDays += getWorkingDaysInMonth(new Date().getFullYear(), firstValue);
     firstValue++;
   }
   return totalDays;
 }
 
 function getFirstValue(inputString) {
-  // Split the string by the delimiter (dash)
   let parts = inputString.split("-");
-  let partNum = Number(parts[0]);
-  // Return the first part, converted to a number (if needed)
-  return partNum;
+  return Number(parts[0]);
 }
 
 function getWorkingDaysInMonth(year, month) {
-  // month is zero-based (0 for January, 1 for February, etc.)
-  let startDate = new Date(year, month, 1);
-  let endDate = new Date(year, month + 1, 0); // Last day of the month
-
+  let startDate = new Date(year, month - 1, 1);
+  let endDate = new Date(year, month, 0);
   let workingDays = 0;
 
-  // Iterate over each day in the month
   for (
     let date = startDate;
     date <= endDate;
     date.setDate(date.getDate() + 1)
   ) {
     let dayOfWeek = date.getDay();
-    // Count weekdays (Monday=1, Tuesday=2, ..., Friday=5)
     if (dayOfWeek >= 1 && dayOfWeek <= 5) {
       workingDays++;
     }
@@ -151,5 +141,204 @@ function getWorkingDaysInMonth(year, month) {
   return workingDays;
 }
 
+// Calendar attendance logic
+function initCalendar() {
+  const calendar = document.getElementById("calendar");
+  const attendanceCount = document.getElementById("attendanceCount");
+  const monthSelect = document.getElementById("monthSelect");
+  const yearSelect = document.getElementById("yearSelect");
 
+  // Retrieve attendance data from local storage
+  let attendance = JSON.parse(localStorage.getItem("attendance")) || {};
+  // debugger
+  // Event listeners for month and year selection changes
+  monthSelect.addEventListener("change", renderCalendar);
+  yearSelect.addEventListener("change", renderCalendar);
 
+  // Function to render the calendar
+  function renderCalendar() {
+    const selectedMonth = parseInt(monthSelect.value);
+    const selectedYear = parseInt(yearSelect.value);
+
+    // Clear existing calendar
+    calendar.innerHTML = "";
+
+    // Get number of days in the selected month
+    const daysInMonth = new Date(selectedYear, selectedMonth + 1, 0).getDate();
+    const firstDayOfMonth = new Date(selectedYear, selectedMonth, 1).getDay(); // 0 = Sunday, 6 = Saturday
+    // debugger
+    // Create empty divs for leading empty days
+    for (let i = 0; i < firstDayOfMonth; i++) {
+      const emptyElement = document.createElement("div");
+      calendar.appendChild(emptyElement);
+    }
+
+    // Render the days of the month
+    for (let day = 1; day <= daysInMonth; day++) {
+      const dayElement = document.createElement("div");
+      dayElement.textContent = day;
+
+      // Determine if it's a Saturday or Sunday
+      const date = new Date(selectedYear, selectedMonth, day);
+      const dayOfWeek = date.getDay(); // 0 = Sunday, 6 = Saturday
+
+      if (dayOfWeek === 0 || dayOfWeek === 6) {
+        dayElement.classList.add("weekend"); // Add a class for weekends
+        dayElement.style.backgroundColor = "red"; // Set background color
+        dayElement.style.color = "white"; // Set text color
+        dayElement.style.cursor = "not-allowed"; // Change cursor
+        dayElement.title = "Attendance cannot be marked"; // Add tooltip
+      } else {
+        const attendanceKey = `${selectedYear}-${selectedMonth}-${day}`;
+        if (attendanceKey == "2024-0-31") {
+          // debugger
+        }
+        if (attendance[attendanceKey]) {
+          dayElement.classList.add("attended");
+        }
+        // Toggle attendance on click for weekdays only
+        dayElement.addEventListener("click", () => {
+          const attended = attendance[attendanceKey];
+
+          // If the user is trying to remove attendance, show confirmation modal
+          if (attended) {
+            // Show the modal
+            const modal = new bootstrap.Modal(
+              document.getElementById("confirmationModal")
+            );
+            modal.show();
+
+            // Handle confirmation button click
+            const confirmRemoveButton =
+              document.getElementById("confirmRemove");
+            confirmRemoveButton.onclick = () => {
+              // Remove attendance
+              delete attendance[attendanceKey];
+              localStorage.setItem("attendance", JSON.stringify(attendance));
+              dayElement.classList.remove("attended"); // Update the class
+              updateAttendanceCount(selectedMonth, selectedYear);
+              modal.hide(); // Hide the modal
+            };
+          } else {
+            // Mark attendance
+            attendance[attendanceKey] = true;
+            localStorage.setItem("attendance", JSON.stringify(attendance));
+            dayElement.classList.add("attended"); // Update the class
+            updateAttendanceCount(selectedMonth, selectedYear);
+          }
+        });
+      }
+
+      calendar.appendChild(dayElement);
+    }
+
+    updateAttendanceCount(selectedMonth, selectedYear);
+  }
+
+  // Update the total attendance count based on the selected month and year
+  function updateAttendanceCount(selectedMonth, selectedYear) {
+    const totalAttendance = Object.keys(attendance).filter((key) => {
+      const [year, month, day] = key.split("-");
+      return (
+        parseInt(month) === selectedMonth &&
+        parseInt(year) === selectedYear &&
+        attendance[key]
+      );
+    }).length;
+    attendanceCount.textContent = totalAttendance;
+  }
+
+  // Initial render of the calendar when the page loads
+  renderCalendar();
+}
+
+function initAttendanceCount(selectedQuater, selectedYear) {
+  const first = getFirstValue(selectedQuater);
+  let attendance = JSON.parse(localStorage.getItem("attendance")) || {};
+  if (attendance != null) {
+    selectedYear = Number(selectedYear);
+    if (selectedQuater.includes("-")) {
+      updateAttendanceCountQuaterly(first, selectedYear);
+    } else {
+      updateAttendanceCount(selectedQuater, selectedYear);
+    }
+  }
+  function updateAttendanceCountQuaterly(selectedMonth, selectedYear) {
+    let totalAttendance;
+    let totalAttendanceCount = 0;
+    let resetSelectedMonth = selectedMonth;
+
+    selectedMonth -= 1;
+    for (let i = 0; i < 3; i++) {
+      // const element = array[index];
+      totalAttendance = Object.keys(attendance).filter((key) => {
+        const [year, month, day] = key.split("-");
+        return (
+          parseInt(month) === selectedMonth &&
+          parseInt(year) === selectedYear &&
+          attendance[key]
+        );
+      }).length;
+      selectedMonth++;
+      totalAttendanceCount += totalAttendance;
+    }
+    attendanceCount.textContent = totalAttendanceCount;
+    selectedMonth = resetSelectedMonth;
+    updateWfoPercenQuater(selectedMonth, totalAttendanceCount);
+  }
+  function updateWfoPercenQuater(firstValue, totalAttendanceCount) {
+    let totalQuaterWorkingDays = quaterCall(firstValue);
+    const WfoQuater = (totalAttendanceCount / totalQuaterWorkingDays * 100).toFixed(2) ;
+    console.log(WfoQuater)
+    WfoQuaterPer.textContent =
+      ((totalAttendanceCount / totalQuaterWorkingDays) * 100).toFixed(2) + "%";
+      if (WfoQuater >= 85) {
+        if(totalEligibleQuaterpay.classList.contains('alert-danger')){
+          totalEligibleQuaterpay.classList.remove('alert-danger')
+        }
+        totalEligibleQuaterpay.classList.add('alert-success');
+        totalEligibleQuaterpay.innerHTML = `Result : Congratulation You are eligible for <b>100%</b> Quater Pay`;
+        QP.innerHTML = `<b>Result</b> : <i>Eligible for <b>100%</b> Quater Pay</i>`;
+      }else if(WfoQuater >= 75 && WfoQuater < 85){
+        totalEligibleQuaterpay.innerHTML = `Result : Great! You are eligible for <b>75%</b> Quater Pay`;
+        QP.innerHTML = `<b>Result</b> : <i>Eligible for <b>75%</b> Quater Pay</i>`;
+        totalEligibleQuaterpay.classList.add('alert-success');
+      }else if(WfoQuater >= 60 && WfoQuater < 75){
+        totalEligibleQuaterpay.innerHTML = `Result : hmm! You are eligible for only <b>50%</b> Quater Pay`;
+        QP.innerHTML = `<b>Result</b> : <i>Eligible for <b>50%</b> Quater Pay</i>`;
+        totalEligibleQuaterpay.classList.add('alert-success');
+      }else{
+        if(totalEligibleQuaterpay.classList.contains('alert-success')){
+          totalEligibleQuaterpay.classList.remove('alert-success')
+        }
+        totalEligibleQuaterpay.innerText = `Result : Sorry! You are not eligible for Quater Pay`;
+        QP.innerHTML = `<b>Result</b> : <i>You are not eligible for Quater Pay</>`;
+        totalEligibleQuaterpay.classList.add('alert-danger','text-center');
+      }
+  }
+  function updateAttendanceCount(selectedMonth, selectedYear) {
+    selectedMonth = Number(selectedMonth);
+    const totalAttendance = Object.keys(attendance).filter((key) => {
+      const [year, month, day] = key.split("-");
+      return (
+        parseInt(month) === selectedMonth &&
+        parseInt(year) === selectedYear &&
+        attendance[key]
+      );
+    }).length;
+
+    attendanceCount1.textContent = totalAttendance;
+    updateWfoPercenMonth(selectedMonth, totalAttendance, selectedYear);
+  }
+  function updateWfoPercenMonth(selectedMonth, totalAttendance, selectedYear) {
+    selectedMonth += 1;
+    let totalMonthWorkingDays = getWorkingDaysInMonth(
+      selectedYear,
+      selectedMonth
+    );
+    // console.log(new Date().getFullYear())
+    // debugger
+    WhoMonthPer.textContent =
+      ((totalAttendance / totalMonthWorkingDays) * 100).toFixed(2) + "%";
+  }
+}
