@@ -17,7 +17,7 @@
         <div class="container-fluid">
             <a class="navbar-brand d-flex align-items-center" href="#">
                 <img src="images/NavIcon.png" alt="Logo" width="30" height="24" class="me-2 ms-4">
-                <span class="ms-2">Quarter Pay Calculator</span>
+                <span class="ms-2 f-8-special">Quarter Pay Calculator</span>
             </a>
             <!-- Hamburger Button for Mobile -->
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
@@ -27,9 +27,12 @@
 
             <!-- Collapsible Content -->
             <div class="collapse navbar-collapse ms-4" id="navbarNav">
-                <ul class="navbar-nav">
+                <ul class="navbar-nav text-center f-8-special">
                     <li class="nav-item">
                         <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="calculate.html">WFO Status</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="aboutMe.html">About Me</a>
@@ -41,7 +44,8 @@
             </div>
         </div>
     </nav>
-    <div class="container mt-5 d-flex justify-content-center border-bottom">
+
+    <!-- <div class="container mt-5 d-flex justify-content-center border-bottom">
         <ul class="nav nav-tabs" id="myTab" role="tablist">
             <li class="nav-item" role="presentation">
                 <button class="nav-link active f-9" id="tab1" data-content="main1" type="button">Target Performance
@@ -50,90 +54,54 @@
             <li class="nav-item" role="presentation">
                 <button class="nav-link f-9" id="tab2" data-content="main2" type="button">Consumed WFH</button>
             </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link f-9" id="tab1" data-content="main3" type="button">Attendance</button>
+            </li>
         </ul>
-    </div>
+    </div> -->
+
+
 
     <main id="main1" class="content-section mt-4">
-        <div id="parentContainer" class="container mt-5 mb-10">
-            <div class="form-container">
-                <div class="form-container">
-                    <h2 class="mb-4">Enter the Details</h2>
-                    <form>
-                        <div class="mb-3">
-                            <label for="inputName" class="form-label">Select Quater</label>
-                            <select id="inputName" class="form-select" required>
-                                <option value="" disabled selected>Select a month</option>
-                                <option value="1-3">Jan - Mar</option>
-                                <option value="4-6">Apr - June</option>
-                                <option value="7-9">July - Sept</option>
-                                <option value="10-12">Oct - Dec</option>
-                            </select>
-                        </div>
-                        <div class="mb-3">
-                            <label for="inputEmail" class="form-label">Select Target Performance bonus</label>
-                            <select id="inputEmail" class="form-select" required>
-                                <option value="" disabled selected>Select a percentage</option>
-                                <option value="85">100%</option>
-                                <option value="75">75%</option>
-                                <option value="60">50%</option>
-                                <option value="0">0</option>
-                            </select>
-                        </div>
+        <div class="container m-auto p-0-special">
 
-                        <button id="btn" class="btn btn-primary">Calculate</button>
-                    </form>
-                </div>
+            <div class="calendar-controls">
+                <!-- <label for="monthSelect">Select Month:</label> -->
+                <select id="monthSelect" class="form-select">
+                    <option value="0">January</option>
+                    <option value="1">February</option>
+                    <option value="2">March</option>
+                    <option value="3">April</option>
+                    <option value="4">May</option>
+                    <option value="5">June</option>
+                    <option value="6">July</option>
+                    <option value="7">August</option>
+                    <option value="8">September</option>
+                    <option value="9">October</option>
+                    <option value="10">November</option>
+                    <option value="11">December</option>
+                </select>
+
+                <!-- <label for="yearSelect">Select Quarter-Year:</label> -->
+                <select id="yearSelect" class="form-select">
+                    <option value="2024">2024</option>
+                    <option value="2025" disabled>2025</option>
+                    <option value="2026" disabled>2026</option>
+                </select>
             </div>
-            <div id="result" class="alert alert-info mt-5 border px-2" role="alert">
-                Result :
+
+            <!-- Calendar will be displayed here -->
+            <div class="sweet-box mt-4 w-fit m-auto">
+                <h2 class="text-center f-8-special">Mark your Attendance</h2>
+                <hr class="mb-4">
+                <div id="calendar"></div>
+                <div class="mt-3 text-center">Present Days: <span id="attendanceCount"></span></div>
             </div>
         </div>
     </main>
 
-    <main id="main2" class="content-section mt-4" style="display: none;">
-        <div id="parentContainer1" class="container mt-5 mb-10">
-            <div class="form-container">
-                <div class="form-container">
-                    <h2 class="mb-4">Enter consumed WFH</h2>
-                    <form>
-                        <div class="mb-3">
-                            <label for="inputName1" class="form-label">Select Quater</label>
-                            <select id="inputName1" class="form-select" required>
-                                <option value="" disabled selected>Select a month</option>
-                                <option value="1-3">Jan - Mar</option>
-                                <option value="4-6">Apr - June</option>
-                                <option value="7-9">July - Sept</option>
-                                <option value="10-12">Oct - Dec</option>
-                            </select>
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="inputEmail1" class="form-label">Select Target Performance bonus</label>
-                            <select id="inputEmail1" class="form-select" required>
-                                <option value="" disabled selected>Select a percentage</option>
-                                <option value="85">100%</option>
-                                <option value="75">75%</option>
-                                <option value="60">50%</option>
-                                <option value="0">0</option>
-                            </select>
-                        </div>
-                        <div class="mb-3">
-                            <label for="daysConsumed" class="form-label">WFH Consumed</label>
-                            <input id="daysConsumed" type="number" class="form-control"
-                                placeholder="Days Consumed this quater" aria-label="Username"
-                                aria-describedby="basic-addon1">
-                        </div>
-                        <button id="btn1" class="btn btn-primary">Calculate</button>
-                    </form>
-                </div>
-            </div>
-            <div id="result1" class="alert alert-info mt-5 border px-2" role="alert">
-                Result :
-            </div>
-        </div>
-    </main>
-    <div class="container border-top w-100 mt-5">
-        <div class="contact-container mt-5 w-50 m-auto mb-5">
+    <div class="container border-top  mt-5">
+        <div class="contact-container mt-5 m-auto mb-5">
             <h1 class="contact-title pb-3 pt-2 mb-4 color-info rounded-top">Contact Me</h1>
             <h1 class="contact-title suse-font">Get In Touch</h1>
             <p class="contact-description suse-font">Connect with me through any of the platforms below</p>
@@ -156,24 +124,51 @@
             </div>
         </div>
     </div>
+
+    <!-- <div class="sweet-box-alt">
+        <h2>Your Performance</h2>
+        <div class="result">
+            <span class="label">Result 1:</span> <span class="value">90%</span>
+        </div>
+        <div class="result">
+            <span class="label">Result 2:</span> <span class="value">88%</span>
+        </div>
+        <div class="result">
+            <span class="label">Result 3:</span> <span class="value">95%</span>
+        </div>
+    </div> -->
+
     <footer class="footerMain">
-        <div id="footer1" class="alert alert-light text-center f-6">
+        <div id="footer1" class="alert alert-light text-center f-8-special">
             Copyright &copy; 2024, Malkani Services. All Rights Reserved.
         </div>
     </footer>
+
+    <!-- Bootstrap Modal -->
+    <div class="modal fade" id="confirmationModal" tabindex="-1" aria-labelledby="confirmationModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="confirmationModalLabel">Confirm Removal</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Are you sure you want to remove attendance for this day?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-danger" id="confirmRemove">Remove</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+    <script src="index.js"></script>
 </body>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-    crossorigin="anonymous"></script>
-<!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-    crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
-    integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
-    crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
-    integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
-    crossorigin="anonymous"></script> -->
-<script src="index.js"></script>
 
 </html>
