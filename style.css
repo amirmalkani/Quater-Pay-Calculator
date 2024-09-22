@@ -1,51 +1,38 @@
 @import url('https://fonts.googleapis.com/css2?family=SUSE&display=swap');
-
-*{
-    margin: 0;padding: 0;
+:root {
+    --primary-color: #0077b5; /* LinkedIn Blue */
+    --secondary-color: #333;  /* Dark Grey */
+    --light-grey: #f8f9fa;
+}
+* {
+    margin: 0;
+    padding: 0;
     box-sizing: border-box;
 }
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
 
-body{
+body {
+    font-family: "SUSE", sans-serif;
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    background-color: var(--light-grey);
 }
+
 main {
-    flex: 1; /* Makes the main content take up available space */
+    flex: 1;
 }
+
 .footerMain {
-    background-color: #f8f9fa; /* Light grey background for footer */
-    /* padding: 10px 0; */
+    background-color: #f8f9fa;
     text-align: center;
     width: 100%;
 }
-/* #footer {
-    position: static;
-    bottom: 0;
-    width: 100%;
-    margin-bottom: 0;
-    font-size: 0.9rem;
-} */
-/* #footer1{ */
-    /* position: static; */
-    /* position: fixed; */
-    /* bottom: 0;
-    width: 100%;
-    margin-bottom: 0;
-    font-size: 0.9rem; */
-/* } */
 
-
-.h-fit{
+.h-fit {
     height: fit-content;
 }
 
-.alert{
+.alert {
     padding-left: 0 !important;
     padding-right: 0 !important;
     margin-top: 20px;
@@ -56,24 +43,14 @@ main {
     animation: fadeIn 1s ease-in-out;
 }
 
-.f-9{
-    font-size: 0.9rem !important;
-}
-.f-6{
-    font-size: 0.8rem !important;
-}
-
-.font-add{
+.font-add {
     font-family: "SUSE", sans-serif;
 }
 
-/* Contact me  */
-
+/* Contact me */
 .contact-container {
     background: #fff;
-    /* background: #e6d9ef; */
     padding-bottom: 2rem;
-    /* padding-top: 0; */
     border-radius: 10px;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
     text-align: center;
@@ -84,15 +61,16 @@ main {
     font-size: 2rem;
     margin-bottom: 1rem;
     color: #333;
+    word-wrap: break-word;
 }
+
 .suse-font {
     font-family: "SUSE", sans-serif;
-    font-optical-sizing: auto;
     font-weight: 400;
     font-style: normal;
-  }
+}
 
-.color-info{
+.color-info {
     background-color: #cff4fc;
 }
 
@@ -123,15 +101,28 @@ main {
 
 .icon:hover {
     transform: scale(1.2);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
-.facebook { background: #3b5998; }
-.instagram { background: #e4405f; }
-.linkedin { background: #0077b5; }
-.whatsapp { background: #25D366; }
-.email { background: #ea4335; }
+.facebook {
+    background: #3b5998;
+}
 
+.instagram {
+    background: #e4405f;
+}
 
+.linkedin {
+    background: #0077b5;
+}
+
+.whatsapp {
+    background: #25D366;
+}
+
+.email {
+    background: #ea4335;
+}
 
 @keyframes fadeIn1 {
     from {
@@ -144,16 +135,169 @@ main {
     }
 }
 
-/* Contact me end */
 
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+/* Calendar Styles */
+#calendar {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+    margin-top: 10px;
+}
+  
+#calendar div {
+    padding: 10px;
+    background-color: #f1f1f1;
+    text-align: center;
+    cursor: pointer;
+}
+  
+  #calendar div.attended {
+    background-color: #4caf50;
+    color: white;
+  }
+  
+  .calendar-controls {
+    display: flex;
+    /* justify-content: space-between; */
+    justify-content: center;
+    /* justify-content: space-around; */
+    margin-bottom: 10px;
+    gap: 0.4rem;
+  }
+   
+  .calendar-controls label {
+    margin-right: 5px;
+  }
+
+  .calendar-controls select{
+    width: fit-content;
 }
 
+.weekend {
+    background-color: red; /* Red background for weekends */
+    color: white; /* White text color for better contrast */
+    cursor: not-allowed; /* Prevent marking attendance */
+}
+
+.f-8{
+    font-size: 0.8rem !important;
+}
+
+.sweet-box {
+    background-color: #e0f7fa; /* Light blue background */
+    border: 2px solid #b2ebf2; /* Slightly darker blue border */
+    border-radius: 15px; /* Rounded corners */
+    padding: 20px; /* Padding inside the box */
+    width: 300px; /* Width of the box */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow for a floating effect */
+    font-family: Arial, sans-serif; /* Font style */
+}
+  
+.sweet-box h2 {
+    color: #00796b; /* Dark teal for headings */
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+  
+.sweet-box p {
+    color: #004d40; /* Darker teal for paragraph text */
+    font-size: 1rem;
+}
+  
+.sweet-box ul {
+    list-style-type: none; /* Remove bullets */
+    padding: 0;
+}
+  
+.sweet-box ul li {
+    background-color: #b2ebf2; /* Slightly darker light blue */
+    margin: 5px 0; /* Space between results */
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 1rem;
+    color: #004d40; /* Darker text for readability */
+}
+
+.w-fit{
+    width: fit-content !important;
+}
+/* start but this is commented in index.html*/ 
+.sweet-box-alt {
+    background: linear-gradient(135deg, #b3e5fc, #e1f5fe); /* Light blue gradient */
+    border: 1px solid #81d4fa; /* Thin blue border */
+    border-radius: 12px; /* Rounded corners */
+    padding: 20px;
+    max-width: 350px; /* Max width for the box */
+    margin: 20px auto; /* Center the box */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* Stronger shadow */
+    font-family: 'Verdana', sans-serif;
+  }
+  
+  .sweet-box-alt h2 {
+    text-align: center; /* Center heading */
+    color: #01579b; /* Deep blue for heading */
+    font-size: 1.6rem;
+    margin-bottom: 20px;
+  }
+  
+  .sweet-box-alt .result {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    background-color: #b3e5fc; /* Light blue for result items */
+    border-radius: 8px;
+    margin-bottom: 10px;
+  }
+  
+  .sweet-box-alt .label {
+    font-weight: bold;
+    color: #0277bd; /* Blue for labels */
+  }
+  
+  .sweet-box-alt .value {
+    color: #01579b; /* Darker blue for values */
+    font-weight: bold;
+  }
+/* end   */
+
+  
+@media (max-width: 768px) {
+    .contact-container {
+        width: 90% !important;
+        padding: 1rem;
+    }
+
+    .social-icons {
+        /* flex-direction: column; */
+        gap: 0.5rem;
+    }
+
+    .w-100-special{
+        width: 100% !important;
+    }
+    .icon {
+        width: 40px;
+        height: 40px;
+        line-height: 40px;
+        font-size: 1.2rem;
+    }
+    .f-8{
+        font-size: 0.6rem !important   ;
+    }
+    .f-5-special{
+        font-size: 0.7rem !important;
+    }
+    .f-8-special{
+        font-size: 0.9rem !important   ;
+    }
+    .f-column{
+        /* flex-direction: column  ; */
+        flex-wrap: wrap;
+    }
+    .mb-special{
+        margin-bottom: 23px;
+    }
+    .p-0-special{
+        padding: 0 !important;
+    }
+}   
