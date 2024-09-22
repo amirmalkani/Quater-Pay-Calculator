@@ -28,7 +28,12 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // Initialize calendar when DOM is loaded
-  if (window.location.href.includes("index.html")) {
+  if (
+    window.location.href.includes("aboutMe.html") ||
+    window.location.href.includes("calculate.html") ||
+    window.location.href.includes("contactMe.html")
+  ) {
+  } else {
     initCalendar();
   }
   // main3.style.display = "none"; // this is added because when the dom was loaded it was appearin in the main1 tab
@@ -288,33 +293,36 @@ function initAttendanceCount(selectedQuater, selectedYear) {
   }
   function updateWfoPercenQuater(firstValue, totalAttendanceCount) {
     let totalQuaterWorkingDays = quaterCall(firstValue);
-    const WfoQuater = (totalAttendanceCount / totalQuaterWorkingDays * 100).toFixed(2) ;
-    console.log(WfoQuater)
+    const WfoQuater = (
+      (totalAttendanceCount / totalQuaterWorkingDays) *
+      100
+    ).toFixed(2);
+    console.log(WfoQuater);
     WfoQuaterPer.textContent =
       ((totalAttendanceCount / totalQuaterWorkingDays) * 100).toFixed(2) + "%";
-      if (WfoQuater >= 85) {
-        if(totalEligibleQuaterpay.classList.contains('alert-danger')){
-          totalEligibleQuaterpay.classList.remove('alert-danger')
-        }
-        totalEligibleQuaterpay.classList.add('alert-success');
-        totalEligibleQuaterpay.innerHTML = `Result : Congratulation You are eligible for <b>100%</b> Quater Pay`;
-        QP.innerHTML = `<b>Result</b> : <i>Eligible for <b>100%</b> Quater Pay</i>`;
-      }else if(WfoQuater >= 75 && WfoQuater < 85){
-        totalEligibleQuaterpay.innerHTML = `Result : Great! You are eligible for <b>75%</b> Quater Pay`;
-        QP.innerHTML = `<b>Result</b> : <i>Eligible for <b>75%</b> Quater Pay</i>`;
-        totalEligibleQuaterpay.classList.add('alert-success');
-      }else if(WfoQuater >= 60 && WfoQuater < 75){
-        totalEligibleQuaterpay.innerHTML = `Result : hmm! You are eligible for only <b>50%</b> Quater Pay`;
-        QP.innerHTML = `<b>Result</b> : <i>Eligible for <b>50%</b> Quater Pay</i>`;
-        totalEligibleQuaterpay.classList.add('alert-success');
-      }else{
-        if(totalEligibleQuaterpay.classList.contains('alert-success')){
-          totalEligibleQuaterpay.classList.remove('alert-success')
-        }
-        totalEligibleQuaterpay.innerText = `Result : Sorry! You are not eligible for Quater Pay`;
-        QP.innerHTML = `<b>Result</b> : <i>You are not eligible for Quater Pay</>`;
-        totalEligibleQuaterpay.classList.add('alert-danger','text-center');
+    if (WfoQuater >= 85) {
+      if (totalEligibleQuaterpay.classList.contains("alert-danger")) {
+        totalEligibleQuaterpay.classList.remove("alert-danger");
       }
+      totalEligibleQuaterpay.classList.add("alert-success");
+      totalEligibleQuaterpay.innerHTML = `Result : Congratulation You are eligible for <b>100%</b> Quater Pay`;
+      QP.innerHTML = `<b>Result</b> : <i>Eligible for <b>100%</b> Quater Pay</i>`;
+    } else if (WfoQuater >= 75 && WfoQuater < 85) {
+      totalEligibleQuaterpay.innerHTML = `Result : Great! You are eligible for <b>75%</b> Quater Pay`;
+      QP.innerHTML = `<b>Result</b> : <i>Eligible for <b>75%</b> Quater Pay</i>`;
+      totalEligibleQuaterpay.classList.add("alert-success");
+    } else if (WfoQuater >= 60 && WfoQuater < 75) {
+      totalEligibleQuaterpay.innerHTML = `Result : hmm! You are eligible for only <b>50%</b> Quater Pay`;
+      QP.innerHTML = `<b>Result</b> : <i>Eligible for <b>50%</b> Quater Pay</i>`;
+      totalEligibleQuaterpay.classList.add("alert-success");
+    } else {
+      if (totalEligibleQuaterpay.classList.contains("alert-success")) {
+        totalEligibleQuaterpay.classList.remove("alert-success");
+      }
+      totalEligibleQuaterpay.innerText = `Result : Sorry! You are not eligible for Quater Pay`;
+      QP.innerHTML = `<b>Result</b> : <i>You are not eligible for Quater Pay</>`;
+      totalEligibleQuaterpay.classList.add("alert-danger", "text-center");
+    }
   }
   function updateAttendanceCount(selectedMonth, selectedYear) {
     selectedMonth = Number(selectedMonth);
