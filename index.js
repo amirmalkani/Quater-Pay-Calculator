@@ -16,6 +16,10 @@ document.addEventListener("DOMContentLoaded", () => {
   const tabs = document.querySelectorAll(".nav-link");
   const mainSections = document.querySelectorAll(".content-section");
 
+  const { month, year } = getCurrentMonthYear();
+  monthSelect.value = month; // set the Current Month
+  yearSelect.value = year; // set the Current Year
+  
   tabs.forEach((tab) => {
     tab.addEventListener("click", () => {
       tabs.forEach((t) => t.classList.remove("active"));
@@ -35,6 +39,12 @@ document.addEventListener("DOMContentLoaded", () => {
   ) {
   } else {
     initCalendar();
+  }
+  function getCurrentMonthYear() {
+    const now = new Date();
+    const month = now.getMonth();
+    const year = now.getFullYear();
+    return { month, year };
   }
   // main3.style.display = "none"; // this is added because when the dom was loaded it was appearin in the main1 tab
 });
